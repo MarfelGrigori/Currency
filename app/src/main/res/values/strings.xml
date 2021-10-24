@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Rest api</string>
+    <string name="error">Error</string>
+    <string name="usd">USD</string>
+    <string name="_1">1 доллар США</string>
+    <string name="_1_96">1.96</string>
+    <string name="_2_00">2.00</string>
+    <string name="settings">настройки</string>
+    <string name="confirm">подтвердить</string>
+    <string name="for_drag">for_drag</string>
+    <string name="_13_12_2021">13.12.2021</string>
+</resources>
