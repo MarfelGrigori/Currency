@@ -59,22 +59,23 @@ class MainActivity : AppCompatActivity() {
         val recycler = binding.recyclerview
 
         recycler.layoutManager = LinearLayoutManager(this)
-        viewModel.ratesTomorrow.observe(this) { it1 ->
+        viewModel.ratesTomorrow.observe(this) {
+                it1 ->
             viewModel.rates.observe(this) {
                 curAdapter = CurrencyAdapter(viewModel)
+                if (it1.isEmpty()){
+                    calendar.add(Calendar.DAY_OF_YEAR, -2)
+                    val yesterday = calendar.time
+                    val yesterdayAsString: String = sdf.format(yesterday)
+                    tomorrowDay.text = yesterdayAsString
+                    val dateYesterday = formatForQuery.format(yesterday)
+                    viewModel.loadRatesForTomorrow(0, dateYesterday)
+                } else
                 curAdapter.initialize(it, it1)
                 recycler.adapter = curAdapter
                 Log.e("TAG", it.toString())
+            }
 
-            }
-            if (it1.isEmpty()){
-                calendar.add(Calendar.DAY_OF_YEAR, -1)
-                val yesterday = calendar.time
-                val yesterdayAsString: String = sdf.format(yesterday)
-                tomorrowDay.text = yesterdayAsString
-                val dateYesterday = formatForQuery.format(yesterday)
-                viewModel.loadRatesForTomorrow(0, dateYesterday)
-            }
         }
         val dateTomorrow = formatForQuery.format(tomorrow)
         viewModel.loadRatesForTomorrow(0, dateTomorrow)
